@@ -6,6 +6,7 @@ from docx.enum.text import WD_LINE_SPACING
 from docx.shared import Pt
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
 import json
+import random
 
 
 def configure_document():
@@ -24,14 +25,18 @@ def main():
     with open(os.path.join('input', filename + '.json'), 'r', encoding='utf-8') as datafile:
         data = json.load(datafile)
 
-    document = configure_document()
+    document = configure_document()  # type: Document
 
     p = document.add_paragraph(data['header'])
 
-    for question in data['questions']:
+    random.seed(None)
+    questions = data['questions']
+    random.shuffle(questions)
+
+    for i, question in enumerate(questions):
         p = document.add_paragraph('')
 
-        p.add_run(question['name']).bold = True
+        p.add_run(question['name'].format(i + 1)).bold = True
         p.add_run(question['description'])
 
         if question['image'] is not None:
@@ -41,8 +46,8 @@ def main():
             p = document.paragraphs[-1]
             p.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
 
-        for option in question['options']:
-            document.add_paragraph(option, style='List Number 3')
+        for j, option in enumerate(question['options']):
+            document.add_paragraph(option, style='List Number 2')
 
     # p = document.add_paragraph('A plain paragraph having some ')
     # p.add_run('bold').bold = True

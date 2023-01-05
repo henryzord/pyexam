@@ -1,0 +1,21 @@
+{
+  "header": "Universidade Federal de Santa Maria\nColégio Técnico Industrial de Santa Maria\nDisciplina de Projeto e Desenvolvimento de Interfaces\nExame Ano Letivo 2022\n\nNome: __________________________________________________________\nTurma:     413    Data: ____/____/____",
+  "questions": [
+    {
+      "name": "(2 pts) Questão 1: ",
+      "description": "Qual das opções abaixo está correta?",
+      "image": null,
+      "options": ["não sei", "sei lá"]
+    },
+    {
+      "name": "(2 pts) Questão 2: ",
+      "description": "Não, sério, qual a opção correta?",
+      "image": {
+        "path":
+          "monty-truth.jpg",
+          "width": "Cm(3.5)"
+      },
+      "options": ["essa opção", "não, esta outra"]
+    }
+  ]
+}

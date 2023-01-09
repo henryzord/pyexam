@@ -5,8 +5,10 @@ from docx.shared import Cm
 from docx.enum.text import WD_LINE_SPACING
 from docx.shared import Pt
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
+from docx.enum.table import WD_TABLE_ALIGNMENT
 import json
 import random
+from math import ceil
 
 
 def configure_document():
@@ -33,6 +35,27 @@ def main():
     questions = data['questions']
     random.shuffle(questions)
 
+    n_cols = 5
+    n_rows = 2 * ceil(len(questions) / n_cols)
+
+    table = document.add_table(rows=n_rows, cols=n_cols)
+    table.alignment = WD_TABLE_ALIGNMENT.CENTER
+
+    counter = 1
+    for i in range(n_rows):
+        if i % 2 == 0:
+            for j in range(n_cols):
+                if counter > len(questions):
+                    break
+                table.cell(i, j).text = 'Questão {0}'.format(counter)
+                table.cell(i, j).vertical_alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
+                # cell.text = 'Questão {0}'.format(counter)
+                # cell.vertical_alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
+                counter += 1
+        else:
+            for j in range(n_cols):
+                table.cell(i, j).text = ' '
+
     for i, question in enumerate(questions):
         p = document.add_paragraph('')
 
@@ -49,40 +72,6 @@ def main():
         for j, option in enumerate(question['options']):
             document.add_paragraph(option, style='List Number 2')
 
-    # p = document.add_paragraph('A plain paragraph having some ')
-    # p.add_run('bold').bold = True
-    # p.add_run(' and some ')
-    # p.add_run('italic.').italic = True
-    #
-    # document.add_heading('Heading, level 1', level=1)
-    # document.add_paragraph('Intense quote', style='Intense Quote')
-    #
-    # document.add_paragraph(
-    #     'first item in unordered list', style='List Bullet'
-    # )
-    # document.add_paragraph(
-    #     'first item in ordered list', style='List Number'
-    # )
-    #
-    # document.add_picture(os.path.join('input', 'monty-truth.jpg'), width=Inches(1.25))
-    #
-    # records = (
-    #     (3, '101', 'Spam'),
-    #     (7, '422', 'Eggs'),
-    #     (4, '631', 'Spam, spam, eggs, and spam')
-    # )
-    #
-    # table = document.add_table(rows=1, cols=3)
-    # hdr_cells = table.rows[0].cells
-    # hdr_cells[0].text = 'Qty'
-    # hdr_cells[1].text = 'Id'
-    # hdr_cells[2].text = 'Desc'
-    # for qty, id, desc in records:
-    #     row_cells = table.add_row().cells
-    #     row_cells[0].text = str(qty)
-    #     row_cells[1].text = id
-    #     row_cells[2].text = desc
-    #
     # document.add_page_break()
 
     document.save(os.path.join('output', filename + '.docx'))

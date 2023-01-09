@@ -5,7 +5,8 @@
       "name": "(2 pts) Questão {0}: ",
       "description": "Qual das opções abaixo está correta?",
       "image": null,
-      "options": ["não sei", "sei lá"]
+      "options": ["não sei", "sei lá"],
+      "correct_index": 0
     },
     {
       "name": "(2 pts) Questão {0}: ",
@@ -15,13 +16,15 @@
           "monty-truth.jpg",
           "width": "Cm(3.5)"
       },
-      "options": ["essa opção", "não, esta outra"]
+      "options": ["essa opção", "não, esta outra"],
+      "correct_index": 1
     },
     {
       "name": "(2 pts) Questão {0}: ",
       "description": "Qual das opções abaixo está correta?",
       "image": null,
-      "options": ["não sei", "sei lá"]
+      "options": ["não sei", "sei lá"],
+      "correct_index": 2
     },
     {
       "name": "(2 pts) Questão {0}: ",
@@ -31,7 +34,8 @@
           "monty-truth.jpg",
           "width": "Cm(3.5)"
       },
-      "options": ["essa opção", "não, esta outra"]
+      "options": ["essa opção", "não, esta outra"],
+      "correct_index": 3
     }
   ]
 }

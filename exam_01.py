@@ -1,14 +1,15 @@
-import os
-from docx import Document
-from docx.opc.coreprops import CoreProperties
-from docx.shared import Cm
-from docx.enum.text import WD_LINE_SPACING
-from docx.shared import Pt
-from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
-from docx.enum.table import WD_TABLE_ALIGNMENT
 import json
+import os
 import random
 from math import ceil
+
+from docx import Document
+from docx.enum.table import WD_TABLE_ALIGNMENT
+from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
+from docx.shared import Cm
+from docx.shared import Pt
+
+import pandas as pd
 
 
 def configure_document():
@@ -20,10 +21,22 @@ def configure_document():
     return document
 
 
-def generate_document(data: dict, filename: str) -> None:
+def generate_master_table(master_answers, filename):
+    df = pd.DataFrame.from_dict(master_answers).T
+    df.to_csv(filename)
+
+
+def generate_document(data: dict, model_number: int, filename: str) -> dict:
+    correct_options = {}
+
     document = configure_document()  # type: Document
 
-    p = document.add_paragraph(data['header'])
+    header = data['header'].format(model_number)
+    pre, post = header.split('<b>')
+    p = document.add_paragraph(pre)
+    pre, post = post.split('</b>')
+    p.add_run(pre).bold = True
+    p.add_run(post)
 
     random.seed(None)
     questions = data['questions']
@@ -31,6 +44,11 @@ def generate_document(data: dict, filename: str) -> None:
 
     n_cols = min(5, len(questions))
     n_rows = 2 * ceil(len(questions) / n_cols)
+
+    document.add_paragraph(
+        'Ao fim da prova, preencha a tabela abaixo, assinalando '
+        'qual alternativa foi escolhida para cada uma das questões.'
+    )
 
     table = document.add_table(rows=n_rows, cols=n_cols)
     table.alignment = WD_TABLE_ALIGNMENT.CENTER
@@ -52,6 +70,8 @@ def generate_document(data: dict, filename: str) -> None:
     document.add_paragraph('')
 
     for i, question in enumerate(questions):
+        correct_value = question['options'][question['correct_index']]
+
         p = document.add_paragraph('')
 
         p.add_run(question['name'].format(i + 1)).bold = True
@@ -67,6 +87,9 @@ def generate_document(data: dict, filename: str) -> None:
         options = question['options']
         random.shuffle(options)
 
+        index = options.index(correct_value)
+        correct_options['Questão {0}'.format(i + 1)] = chr(ord('a') + index)
+
         p = document.add_paragraph('{0}) {1}\n'.format('a', options[0]))
         op = ord('b')
         for option in options[1:]:
@@ -77,6 +100,8 @@ def generate_document(data: dict, filename: str) -> None:
 
     document.save(filename)
 
+    return correct_options
+
 
 def main():
     filename = os.path.basename(__file__).split('.')[0]
@@ -84,8 +109,14 @@ def main():
     with open(os.path.join('input', filename + '.json'), 'r', encoding='utf-8') as datafile:
         data = json.load(datafile)
 
+    master_answers = {}
     for i in range(1, data['n_assignments'] + 1):
-        generate_document(data, os.path.join('output', '{0}_model_{1:02d}.{2}'.format(filename, i, 'docx')))
+        correct_answers = generate_document(
+            data, i, os.path.join('output', '{0}_model_{1:02d}.{2}'.format(filename, i, 'docx'))
+        )
+        master_answers['Modelo {0:02d}'.format(i)] = correct_answers
+
+    generate_master_table(master_answers, os.path.join('output', 'master_table.csv'))
 
 
 if __name__ == '__main__':

@@ -1,5 +1,5 @@
 {
-  "header": "Universidade Federal de Santa Maria\nColégio Técnico Industrial de Santa Maria\nDisciplina de Projeto e Desenvolvimento de Interfaces\nExame Ano Letivo 2022\n\nNome: __________________________________________________________\nTurma:     413    Data: ____/____/____",
+  "header": "Universidade Federal de Santa Maria\nColégio Técnico Industrial de Santa Maria\nDisciplina de Projeto e Desenvolvimento de Interfaces\nExame Ano Letivo 2022 -- <b>Modelo {0}</b>\n\nNome: __________________________________________________________\nTurma:     413    Data: ____/____/____",
   "n_assignments": 2,
   "questions": [
     {
@@ -8,6 +8,13 @@
       "image": null,
       "options": ["Apenas I", "Apenas II", "Apenas III", "I e II apenas", "II e III apenas"],
       "correct_index": 0
+    },
+    {
+      "name": "(2 pts) Questão {0}: ",
+      "description": "lorem ipsum",
+      "image": null,
+      "options": ["lorem", "ipsum"],
+      "correct_index": 1
     }
   ]
 }

@@ -20,13 +20,7 @@ def configure_document():
     return document
 
 
-def main():
-    filename = os.path.basename(__file__).split('.')[0]
-
-    data = None
-    with open(os.path.join('input', filename + '.json'), 'r', encoding='utf-8') as datafile:
-        data = json.load(datafile)
-
+def generate_document(data: dict, filename: str) -> None:
     document = configure_document()  # type: Document
 
     p = document.add_paragraph(data['header'])
@@ -35,7 +29,7 @@ def main():
     questions = data['questions']
     random.shuffle(questions)
 
-    n_cols = 5
+    n_cols = min(5, len(questions))
     n_rows = 2 * ceil(len(questions) / n_cols)
 
     table = document.add_table(rows=n_rows, cols=n_cols)
@@ -49,12 +43,13 @@ def main():
                     break
                 table.cell(i, j).text = 'Questão {0}'.format(counter)
                 table.cell(i, j).vertical_alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
-                # cell.text = 'Questão {0}'.format(counter)
-                # cell.vertical_alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
+                table.cell(i, j).paragraphs[0].alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
                 counter += 1
         else:
             for j in range(n_cols):
                 table.cell(i, j).text = ' '
+
+    document.add_paragraph('')
 
     for i, question in enumerate(questions):
         p = document.add_paragraph('')
@@ -69,12 +64,28 @@ def main():
             p = document.paragraphs[-1]
             p.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
 
-        for j, option in enumerate(question['options']):
-            document.add_paragraph(option, style='List Number 2')
+        options = question['options']
+        random.shuffle(options)
+
+        p = document.add_paragraph('{0}) {1}\n'.format('a', options[0]))
+        op = ord('b')
+        for option in options[1:]:
+            p.add_run('{0}) {1}\n'.format(chr(op), option))
+            op += 1
 
     # document.add_page_break()
 
-    document.save(os.path.join('output', filename + '.docx'))
+    document.save(filename)
+
+
+def main():
+    filename = os.path.basename(__file__).split('.')[0]
+
+    with open(os.path.join('input', filename + '.json'), 'r', encoding='utf-8') as datafile:
+        data = json.load(datafile)
+
+    for i in range(1, data['n_assignments'] + 1):
+        generate_document(data, os.path.join('output', '{0}_model_{1:02d}.{2}'.format(filename, i, 'docx')))
 
 
 if __name__ == '__main__':

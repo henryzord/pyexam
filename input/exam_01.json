@@ -1,41 +1,13 @@
 {
   "header": "Universidade Federal de Santa Maria\nColégio Técnico Industrial de Santa Maria\nDisciplina de Projeto e Desenvolvimento de Interfaces\nExame Ano Letivo 2022\n\nNome: __________________________________________________________\nTurma:     413    Data: ____/____/____",
+  "n_assignments": 2,
   "questions": [
     {
       "name": "(2 pts) Questão {0}: ",
-      "description": "Qual das opções abaixo está correta?",
+      "description": "Considere as afirmações abaixo.\n\nI. O HTML serve para estruturar a página da Web.\nII. O CSS serve para adicionar interatividade a página da Web.\nIII. O Javascript serve para estruturar a página da Web.\n\nAssinale a alternativa correta:",
       "image": null,
-      "options": ["não sei", "sei lá"],
+      "options": ["Apenas I", "Apenas II", "Apenas III", "I e II apenas", "II e III apenas"],
       "correct_index": 0
-    },
-    {
-      "name": "(2 pts) Questão {0}: ",
-      "description": "Não, sério, qual a opção correta?",
-      "image": {
-        "path":
-          "monty-truth.jpg",
-          "width": "Cm(3.5)"
-      },
-      "options": ["essa opção", "não, esta outra"],
-      "correct_index": 1
-    },
-    {
-      "name": "(2 pts) Questão {0}: ",
-      "description": "Qual das opções abaixo está correta?",
-      "image": null,
-      "options": ["não sei", "sei lá"],
-      "correct_index": 2
-    },
-    {
-      "name": "(2 pts) Questão {0}: ",
-      "description": "Não, sério, qual a opção correta?",
-      "image": {
-        "path":
-          "monty-truth.jpg",
-          "width": "Cm(3.5)"
-      },
-      "options": ["essa opção", "não, esta outra"],
-      "correct_index": 3
     }
   ]
 }

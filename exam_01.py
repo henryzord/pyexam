@@ -11,6 +11,10 @@ from docx.shared import Pt
 
 import pandas as pd
 
+import subprocess
+
+import argparse
+
 
 def configure_document():
     document = Document()
@@ -52,6 +56,7 @@ def generate_document(data: dict, model_number: int, filename: str) -> dict:
 
     table = document.add_table(rows=n_rows, cols=n_cols)
     table.alignment = WD_TABLE_ALIGNMENT.CENTER
+    table.style = 'Table Grid'  # single lines in all cells
 
     counter = 1
     for i in range(n_rows):
@@ -103,21 +108,32 @@ def generate_document(data: dict, model_number: int, filename: str) -> dict:
     return correct_options
 
 
-def main():
-    filename = os.path.basename(__file__).split('.')[0]
+def main(input_file, output_folder):
+    filename = os.path.basename(input_file).split('.')[0]
 
-    with open(os.path.join('input', filename + '.json'), 'r', encoding='utf-8') as datafile:
+    with open(input_file, 'r', encoding='utf-8') as datafile:
         data = json.load(datafile)
 
     master_answers = {}
     for i in range(1, data['n_assignments'] + 1):
+        output_docx = '{0}_model_{1:02d}.{2}'.format(filename, i, 'docx')
+
         correct_answers = generate_document(
-            data, i, os.path.join('output', '{0}_model_{1:02d}.{2}'.format(filename, i, 'docx'))
+            data, i, os.path.join(output_folder, output_docx)
         )
+
+        script_path = os.path.dirname(os.path.abspath(__file__))
+
+        subprocess.call([
+            'soffice', '--headless',
+            '--convert-to', 'pdf', os.path.join(script_path, output_folder, output_docx),
+            '--outdir', os.path.join(script_path, output_folder)
+        ])
+
         master_answers['Modelo {0:02d}'.format(i)] = correct_answers
 
-    generate_master_table(master_answers, os.path.join('output', 'master_table.csv'))
+    generate_master_table(master_answers, os.path.join(output_folder, 'master_table.csv'))
 
 
 if __name__ == '__main__':
-    main()
+    main(input_file=os.path.join('input', 'exam_01.json'), output_folder='output')

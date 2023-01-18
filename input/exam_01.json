@@ -11,10 +11,16 @@
     },
     {
       "name": "(2 pts) Questão {0}: ",
-      "description": "lorem ipsum",
+      "description": "Assinale a alternativa correta:",
       "image": null,
-      "options": ["lorem", "ipsum"],
-      "correct_index": 1
+      "options": [
+        "o git é uma ferramenta de versionamento, enquanto o GitHub é um site para armazenar repositórios remotos",
+        "O git é a nuvem do GitHub, enquanto o GitHub faz o controle de versão dos códigos-fonte",
+        "O comando git add salva uma versão do código-fonte, enquanto o comando git commit envia esta versão para a nuvem",
+        "O comando git clone baixa as modificações mais recentes de um repositório remoto já existente no computador, enquanto o comando git pull envia as modificações para a nuvem",
+        "Um conflito ocorre quando duas versões do mesmo código-fonte são enviadas para o git (a nuvem) ao mesmo tempo."
+      ],
+      "correct_index": 0
     }
   ]
 }

@@ -1,2 +1,3 @@
 python-docx==0.8.*
 pandas~=1.4.4
+libreoffice_convert==1.0.*

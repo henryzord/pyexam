@@ -1,0 +1,72 @@
+{
+  "header": "Universidade Federal de Santa Maria\nColégio Técnico Industrial de Santa Maria\nDisciplina de Projeto e Desenvolvimento de Interfaces\nExame Ano Letivo 2022 - <b>Modelo {0}</b>\n\nNome: __________________________________________________________\nTurma:     413    Data: ____/____/____",
+  "n_assignments": 2,
+  "questions": [
+    {
+      "name": "(1.66 pt) Questão {0}: ",
+      "description": "Considere as afirmações abaixo.\n\nI. O HTML serve para estruturar a página da Web.\nII. O CSS serve para adicionar interatividade a página da Web.\nIII. O Javascript serve para estruturar a página da Web.\n\nAssinale a alternativa correta:",
+      "image": null,
+      "options": ["Apenas I", "Apenas II", "Apenas III", "I e II apenas", "II e III apenas"],
+      "correct_index": 0
+    },
+    {
+      "name": "(1.66 pt) Questão {0}: ",
+      "description": "Assinale a alternativa correta:",
+      "image": null,
+      "options": [
+        "O git é uma ferramenta de versionamento, enquanto o GitHub é um site para armazenar repositórios remotos.",
+        "O git é a nuvem do GitHub, enquanto o GitHub faz o controle de versão dos códigos-fonte.",
+        "O comando git add salva uma versão do código-fonte, enquanto o comando git commit envia esta versão para a nuvem.",
+        "O comando git clone baixa as modificações mais recentes de um repositório remoto já existente no computador, enquanto o comando git pull envia as modificações para a nuvem.",
+        "Um conflito ocorre quando duas versões do mesmo código-fonte são enviadas para o git (a nuvem) ao mesmo tempo."
+      ],
+      "correct_index": 0
+    },
+    {
+      "name": "(1.66 pt) Questão {0}: ",
+      "description": "Considerando o seguinte código-fonte, escrito na linguagem de marcação CSS, assinale a alternativa correta:\n\n* {\n    font-family: Verdana;\n}\np {\n    font-family: Arial;\n}\n.big {\n    font-size: 30pt;\n}\n#intro {\n    color: #00dd00;\n}\np::selection {\n    background-color: cyan;\n    color: black;\n}\n\n",
+      "image": null,
+      "options": [
+        "O símbolo # é usado para se referenciar a uma classe, enquanto o símbolo * é usado para se referenciar a um id.",
+        "O símbolo . é usado para se referenciar a uma classe, enquanto p é o nome da tag a qual a propriedade \"font-family: Arial\" será aplicada.",
+        "Os dois pontos duplos são seletores de classe, enquanto o . é um seletor de pseudoclasse.",
+        "A letra p é o nome da classe a qual será atribuída a propriedade \"font-family: Arial\".",
+        "O símbolo # denota o seletor de pseudoclasse, que será utilizado apenas quando um certo comportamento da tag for invocado (por exemplo, passar o mouse por cima)."
+      ],
+      "correct_index": 1
+    },
+    {
+      "name": "(1.66 pt) Questão {0}: ",
+      "description": "Assinale a alternativa correta:",
+      "image": null,
+      "options": [
+        "Um cookie é usado para salvar informações de maneira persistente (duradoura) no navegador.",
+        "Definimos um cookie usando o comando window.alert(\"cookie='ola mundo'\"), por exemplo.",
+        "Definimos um cookie usando o comando document.getElementById(\"cookie='ola mundo'\"), por exemplo.",
+        "Não é preciso usar nenhum código Javascript para salvar um cookie numa página HTML.",
+        "Ao fecharmos o navegador, os cookies salvos são imediatamente descartados."
+      ],
+      "correct_index": 0
+    },
+    {
+      "name": "(1.66 pt) Questão {0}: ",
+      "description": "Considere as afirmações abaixo.\n\nI. Uma função possui quatro componentes: nome, parâmetros, retorno e escopo.\nII. Uma função não precisa necessariamente retornar alguma coisa.\nIII. Uma função não pode chamar outra função dentro do seu escopo.",
+      "image": null,
+      "options": ["Apenas I", "Apenas II", "Apenas III", "I e II apenas", "II e III apenas"],
+      "correct_index": 3
+    },
+    {
+      "name": "(1.70 pt) Questão {0}: ",
+      "description": "Considere o código-fonte abaixo, escrito na linguagem de Programação Javascript. O que será impresso na tela?\n\nlet vetor = Array();\nvetor.push(1);\nvetor.push(1);\n\nfor(let i = 0; i < 10; i++) {\n    if(i === 0 || i === 1)  {\n        vetor.push(1);        \n    } else {\n        vetor.push(vetor[i - 1] + vetor[i - 2]);    \n    }\n}\n\nprint(vetor);",
+      "image": null,
+      "options": [
+        "1,1,1,1,2,2,2,3,4,4,5,7",
+        "1,1,2,3,5,8,13,21,34,55",
+        "1,1",
+        "O código-fonte apresentará um erro e não executará.",
+        "1,1,2,3,5,8,13,21"
+      ],
+      "correct_index": 0
+    }
+  ]
+}

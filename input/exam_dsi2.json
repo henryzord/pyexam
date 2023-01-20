@@ -1,0 +1,74 @@
+{
+  "header": "Universidade Federal de Santa Maria\nColégio Técnico Industrial de Santa Maria\nDisciplina de Projeto e Desenvolvimento de Interfaces\nExame Ano Letivo 2022 - <b>Modelo {0}</b>\n\nNome: __________________________________________________________\nTurma:     413    Data: ____/____/____",
+  "questions": [
+    {
+      "name": "(1.66 pt) Questão {0}: ",
+      "description": "Assinale a alternativa CORRETA:",
+      "image": null,
+      "options": [
+        "O git é uma ferramenta de versionamento, enquanto o GitHub é um site para armazenar repositórios remotos.",
+        "O git é a nuvem do GitHub, enquanto o GitHub faz o controle de versão dos códigos-fonte.",
+        "O comando git add salva uma versão do código-fonte, enquanto o comando git commit envia esta versão para a nuvem.",
+        "O comando git clone baixa as modificações mais recentes de um repositório remoto já existente no computador, enquanto o comando git pull envia as modificações para a nuvem.",
+        "O git é capaz de sempre resolver conflitos de código-fonte, de maneira automática, e sem qualquer interferência humana."
+      ],
+      "correct_index": 0
+    },
+    {
+      "name": "(1.66 pt) Questão {0}: ",
+      "description": "Considere as afirmações abaixo.\n\nI. Uma função possui quatro componentes: nome, parâmetros, retorno e escopo.\nII. Uma função não precisa necessariamente retornar alguma coisa.\nIII. Uma função não pode chamar outra função dentro do seu escopo.",
+      "image": null,
+      "options": ["Apenas I", "Apenas II", "Apenas III", "I e II apenas", "II e III apenas"],
+      "correct_index": 3
+    },
+    {
+      "name": "(1.66 pt) Questão {0}: ",
+      "description": "Considere o código-fonte abaixo, escrito na linguagem de Programação Python. O que será impresso na tela?\n\nvetor = []\nvetor.append(1)\nvetor.append(1)\n\nfor i in range(10):\n    if i == 0 or i == 1:\n        vetor.append(1)\n    else:\n        vetor.append(vetor[i - 1] + vetor[i - 2])\n\nprint(vetor)",
+      "image": null,
+      "options": [
+        "1,1,1,1,2,2,2,3,4,4,5,7",
+        "1,1,2,3,5,8,13,21,34,55",
+        "1,1",
+        "O código-fonte apresentará um erro e não executará.",
+        "1,1,2,3,5,8,13,21"
+      ],
+      "correct_index": 0
+    },
+    {
+      "name": "(1.7 pt) Questão {0}: ",
+      "description": "Observe o código-fonte Python abaixo, sobre o uso de exceções.\n\nnumero = int(input('Digite um número:'))\n\ntry:\n\tprint('0')\n\tresult = 5/numero\n\tprint('1')\nexcept ZeroDivisionError as e:\n\tprint('2')\nfinally:\n\tprint('3')\n\nAssinale a alternativa CORRETA:",
+      "image": null,
+      "options": [
+        "O código-fonte executará sem exceções para o valor de entrada 1, do tipo int.",
+        "O código-fonte executará sem exceções para qualquer tipo de valor de entrada.",
+        "O código-fonte dará erro, e nunca será executado, independente do tipo de entrada fornecida.",
+        "O código-fonte executará sem exceções para o valor de entrada 0, do tipo int.",
+        "O código-fonte executará sem exceções para o valor de entrada '1', do tipo str."
+      ],
+      "correct_index": 0
+    },
+    {
+      "name": "(1.66 pt) Questão {0}: ",
+      "description": "Considere a organização do projeto pythonFlask, e as afirmações abaixo.\n\nI. A pasta app é um pacote, pois possui um arquivo __init__.py.\nII. O arquivo views.py é um pacote.\nIII. O arquivo models.py é um módulo.",
+      "image": {
+        "path": "pythonFlask.png",
+        "width": "Cm(7)"
+      },
+      "options": [
+        "Apenas I e III",
+        "Apenas I",
+        "Apenas II",
+        "Apenas III",
+        "Nenhuma alternativa"
+      ],
+      "correct_index": 0
+    },
+    {
+      "name": "(1.66 pt) Questão {0}: ",
+      "description": "Considere as afirmações abaixo.\n\nI. O HTML serve para estilizar a página da Web.\nII. O CSS serve para adicionar interatividade a página da Web.\nIII. O Javascript serve para estruturar a página da Web.\n\nAssinale a alternativa correta:",
+      "image": null,
+      "options": ["Apenas I", "Apenas II", "I e II apenas", "II e III apenas", "Nenhuma das alternativas."],
+      "correct_index": 4
+    }
+  ]
+}

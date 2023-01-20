@@ -1,3 +1,4 @@
+import copy
 import json
 import os
 import random
@@ -30,7 +31,7 @@ def generate_master_table(master_answers, filename):
     df.to_csv(filename)
 
 
-def generate_document(data: dict, model_number: int, filename: str) -> dict:
+def generate_document(data: dict, model_number: int, filename: str, input_folder) -> dict:
     correct_options = {}
 
     document = configure_document()  # type: Document
@@ -43,7 +44,7 @@ def generate_document(data: dict, model_number: int, filename: str) -> dict:
     p.add_run(post)
 
     random.seed(None)
-    questions = data['questions']
+    questions = copy.deepcopy(data['questions'])
     random.shuffle(questions)
 
     n_cols = min(5, len(questions))
@@ -85,7 +86,7 @@ def generate_document(data: dict, model_number: int, filename: str) -> dict:
         if question['image'] is not None:
             width = eval(question['image']['width'])  # type: Cm
 
-            document.add_picture(os.path.join('input', question['image']['path']), width=width)
+            document.add_picture(os.path.join(input_folder, question['image']['path']), width=width)
             p = document.paragraphs[-1]
             p.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
 
@@ -108,18 +109,19 @@ def generate_document(data: dict, model_number: int, filename: str) -> dict:
     return correct_options
 
 
-def main(input_file, output_folder):
+def main(input_file, output_folder, n_assignments=1):
     filename = os.path.basename(input_file).split('.')[0]
+    input_folder = os.sep.join(input_file.split(os.sep)[:-1])
 
     with open(input_file, 'r', encoding='utf-8') as datafile:
         data = json.load(datafile)
 
     master_answers = {}
-    for i in range(1, data['n_assignments'] + 1):
+    for i in range(1, n_assignments + 1):
         output_docx = '{0}_model_{1:02d}.{2}'.format(filename, i, 'docx')
 
         correct_answers = generate_document(
-            data, i, os.path.join(output_folder, output_docx)
+            data, i, os.path.join(output_folder, output_docx), input_folder=input_folder
         )
 
         script_path = os.path.dirname(os.path.abspath(__file__))
@@ -132,8 +134,27 @@ def main(input_file, output_folder):
 
         master_answers['Modelo {0:02d}'.format(i)] = correct_answers
 
-    generate_master_table(master_answers, os.path.join(output_folder, 'master_table.csv'))
+    generate_master_table(master_answers, os.path.join(output_folder, '{0}_master_table.csv'.format(filename)))
 
 
 if __name__ == '__main__':
-    main(input_file=os.path.join('input', 'exam_01.json'), output_folder='output')
+    parser = argparse.ArgumentParser(
+        description='Automatically generates exames based on a JSON file. Randomizes question and options orders.'
+    )
+
+    parser.add_argument(
+        '--input-file', action='store', required=True,
+        help='Path to input JSON file.'
+    )
+    parser.add_argument(
+        '--output-folder', action='store', required=True,
+        help='Path to output folder where exams will be stored, both in docx, pdf and csv format.'
+    )
+    parser.add_argument(
+        '--n-assignments', action='store', required=False, type=int, default=1,
+        help='Number of different exams to generate. Defaults to 1'
+    )
+
+    args = parser.parse_args()
+
+    main(input_file=args.input_file, output_folder=args.output_folder, n_assignments=args.n_assignments)
